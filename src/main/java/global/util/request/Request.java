@@ -1,6 +1,6 @@
-package util.request;
+package global.util.request;
 
-import util.Session;
+import global.util.Session;
 
 import java.util.HashMap;
 import java.util.Map;

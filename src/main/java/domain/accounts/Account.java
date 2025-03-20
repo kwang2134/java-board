@@ -1,7 +1,7 @@
 package domain.accounts;
 
 import domain.BaseEntity;
-import util.annotation.Id;
+import global.util.annotation.Id;
 
 public class Account extends BaseEntity {
     @Id

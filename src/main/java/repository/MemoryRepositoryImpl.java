@@ -1,6 +1,6 @@
 package repository;
 
-import util.annotation.Id;
+import global.util.annotation.Id;
 
 import java.lang.reflect.Field;
 import java.util.*;

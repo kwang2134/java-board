@@ -1,7 +1,7 @@
 package domain.posts;
 
 import domain.BaseEntity;
-import util.annotation.Id;
+import global.util.annotation.Id;
 
 public class Post extends BaseEntity {
     @Id

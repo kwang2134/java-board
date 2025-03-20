@@ -1,6 +1,4 @@
-package util;
-
-import domain.accounts.Role;
+package global.util;
 
 public class Session {
     private static Session instance;

@@ -2,8 +2,8 @@ package controller.accounts;
 
 import domain.accounts.Account;
 import service.accounts.AccountService;
-import util.Session;
-import util.request.Request;
+import global.util.Session;
+import global.util.request.Request;
 
 import java.util.Scanner;
 

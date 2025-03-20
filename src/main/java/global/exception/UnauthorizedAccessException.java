@@ -1,4 +1,4 @@
-package exception;
+package global.exception;
 
 public class UnauthorizedAccessException {
 

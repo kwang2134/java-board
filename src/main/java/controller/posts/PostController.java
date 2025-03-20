@@ -2,10 +2,9 @@ package controller.posts;
 
 import domain.accounts.Account;
 import domain.posts.Post;
-import exception.UnauthorizedAccessException;
 import service.posts.PostService;
-import util.Session;
-import util.request.Request;
+import global.util.Session;
+import global.util.request.Request;
 
 public class PostController {
     private final PostService postService;

@@ -1,4 +1,4 @@
-package exception.boards;
+package global.exception.boards;
 
 public class BoardNotFoundException {
     public BoardNotFoundException(String message) {

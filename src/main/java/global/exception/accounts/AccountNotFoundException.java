@@ -1,4 +1,4 @@
-package exception.accounts;
+package global.exception.accounts;
 
 public class AccountNotFoundException {
     public AccountNotFoundException(String message) {

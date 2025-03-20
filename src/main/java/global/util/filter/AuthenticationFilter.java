@@ -1,7 +1,7 @@
-package util.filter;
+package global.util.filter;
 
-import exception.UnauthorizedException;
-import util.request.Request;
+import global.exception.UnauthorizedException;
+import global.util.request.Request;
 
 public class AuthenticationFilter implements Filter {
     @Override

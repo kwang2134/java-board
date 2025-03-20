@@ -1,13 +1,9 @@
-package config;
+package global.config;
 
 import controller.accounts.AccountController;
 import controller.boards.BoardController;
 import controller.posts.PostController;
-import domain.accounts.Account;
-import domain.boards.Board;
-import domain.posts.Post;
-import handler.CommandProcessor;
-import repository.MemoryRepositoryImpl;
+import global.handler.CommandProcessor;
 import repository.accounts.AccountRepository;
 import repository.accounts.AccountRepositoryImpl;
 import repository.boards.BoardRepository;
@@ -17,7 +13,7 @@ import repository.posts.PostRepositoryImpl;
 import service.accounts.AccountService;
 import service.boards.BoardService;
 import service.posts.PostService;
-import util.Container;
+import global.util.Container;
 
 public class MemoryApplication {
     public static void run(String[] args) {

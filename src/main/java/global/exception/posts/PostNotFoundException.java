@@ -1,4 +1,4 @@
-package exception.posts;
+package global.exception.posts;
 
 public class PostNotFoundException {
     public PostNotFoundException(String message) {

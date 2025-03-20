@@ -1,8 +1,8 @@
-package handler;
+package global.handler;
 
-import util.Container;
-import util.request.Request;
-import util.request.RequestHandler;
+import global.util.Container;
+import global.util.request.Request;
+import global.util.request.RequestHandler;
 
 import java.util.Scanner;
 

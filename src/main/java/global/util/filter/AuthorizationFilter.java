@@ -1,9 +1,9 @@
-package util.filter;
+package global.util.filter;
 
 import domain.accounts.Account;
 import domain.accounts.Role;
-import exception.UnauthorizedAccessException;
-import util.request.Request;
+import global.exception.UnauthorizedAccessException;
+import global.util.request.Request;
 
 public class AuthorizationFilter implements Filter {
     @Override

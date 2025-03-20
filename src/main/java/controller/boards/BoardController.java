@@ -4,9 +4,8 @@ import domain.accounts.Account;
 import domain.boards.Board;
 import domain.posts.Post;
 import service.boards.BoardService;
-import service.posts.PostService;
-import util.Session;
-import util.request.Request;
+import global.util.Session;
+import global.util.request.Request;
 
 import java.util.List;
 
@@ -44,7 +43,13 @@ public class BoardController {
     }
 
     public void viewBoard(Request request, String boardName) {
-        List<Post> posts = boardService.viewBoard(boardName).getPosts();
+        Board board = boardService.viewBoard(boardName);
+        List<Post> posts = board.getPosts();
+        System.out.println("게시판 이름: " + board.getBoardName());
+        System.out.println("게시판 생성 일자: " + board.getCreatedAt());
+        System.out.println("게시판 설명: " + board.getBoardDescription());
+        System.out.println("게시판 생성자: " + board.getCreatedBy());
+        System.out.println("-----게시물 목록-----");
         for (Post post : posts) {
             System.out.println(post.getPostId() + "/" + post.getTitle() + "/" + post.getCreatedAt());
         }

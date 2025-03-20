@@ -4,9 +4,9 @@ import domain.accounts.Account;
 import domain.accounts.Role;
 import domain.boards.Board;
 import domain.posts.Post;
-import exception.UnauthorizedAccessException;
-import exception.boards.BoardNotFoundException;
-import exception.posts.PostNotFoundException;
+import global.exception.UnauthorizedAccessException;
+import global.exception.boards.BoardNotFoundException;
+import global.exception.posts.PostNotFoundException;
 import repository.boards.BoardRepository;
 import repository.posts.PostRepository;
 

@@ -1,4 +1,4 @@
-package handler;
+package global.handler;
 
 import domain.accounts.Account;
 import domain.boards.Board;
@@ -6,7 +6,7 @@ import domain.posts.Post;
 import repository.accounts.AccountRepository;
 import repository.boards.BoardRepository;
 import repository.posts.PostRepository;
-import util.Container;
+import global.util.Container;
 
 public class InitTest {
 

@@ -2,7 +2,7 @@ package domain.boards;
 
 import domain.BaseEntity;
 import domain.posts.Post;
-import util.annotation.Id;
+import global.util.annotation.Id;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,14 @@ public class Board extends BaseEntity {
     public void modifyBoard(String boardName) {
         this.boardName = boardName;
         setUpdatedAt();
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public String getBoardDescription() {
+        return boardDescription;
     }
 
     public Long getBoardId() {

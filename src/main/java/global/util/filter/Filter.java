@@ -1,7 +1,7 @@
-package util.filter;
+package global.util.filter;
 
 
-import util.request.Request;
+import global.util.request.Request;
 
 public interface Filter {
     boolean doFilter(Request request, FilterChain chain);

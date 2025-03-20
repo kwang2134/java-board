@@ -1,7 +1,7 @@
 package service.boards;
 
 import domain.boards.Board;
-import exception.boards.BoardNotFoundException;
+import global.exception.boards.BoardNotFoundException;
 import repository.boards.BoardRepository;
 
 public class BoardService {

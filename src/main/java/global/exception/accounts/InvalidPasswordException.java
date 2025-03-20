@@ -1,4 +1,4 @@
-package exception.accounts;
+package global.exception.accounts;
 
 import domain.accounts.Account;
 

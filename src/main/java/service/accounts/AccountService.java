@@ -1,8 +1,8 @@
 package service.accounts;
 
 import domain.accounts.Account;
-import exception.accounts.AccountNotFoundException;
-import exception.accounts.InvalidPasswordException;
+import global.exception.accounts.AccountNotFoundException;
+import global.exception.accounts.InvalidPasswordException;
 import repository.accounts.AccountRepository;
 
 public class AccountService {
