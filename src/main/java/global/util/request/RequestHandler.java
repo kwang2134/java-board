@@ -23,6 +23,8 @@ public class RequestHandler {
     }
 
     public void handle(Request request) {
+        filterChain.reset();
+
         if(filterChain.doFilter(request)) {
             String path = request.getUrl().split("\\?")[0];
 

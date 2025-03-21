@@ -1,5 +1,7 @@
 package service.posts;
 
+import controller.posts.dto.PostDTO;
+import controller.posts.dto.PostEditDTO;
 import domain.accounts.Account;
 import domain.accounts.Role;
 import domain.boards.Board;
@@ -19,7 +21,15 @@ public class PostService {
         this.boardRepository = boardRepository;
     }
 
-    public Post addPost(Post post) {
+    public Post addPost(PostDTO postDTO, Long accountId, Long boardId) {
+        Post post = new Post.PostBuilder()
+                .title(postDTO.getTitle())
+                .content(postDTO.getContent())
+                .createdBy(postDTO.getCreatedBy())
+                .AccountId(accountId)
+                .boardId(boardId)
+                .build();
+
         Post savedPost = postRepository.save(post);
         Board board = boardRepository.findById(savedPost.getBoardId()).orElseGet(() -> {
             new BoardNotFoundException("게시판을 찾을 수 없습니다.");
@@ -27,6 +37,7 @@ public class PostService {
         });
 
         board.addPost(savedPost);
+        System.out.println("게시물이 등록되었습니다. 게시물 Id = " + savedPost.getPostId());
         return savedPost;
     }
 
@@ -43,14 +54,14 @@ public class PostService {
         }
     }
 
-    public Post editPost(Long postId, String title, String content, Account account) {
+    public Post editPost(Long postId, PostEditDTO postEditDTO, Account account) {
         Post post = postRepository.findById(postId).orElseGet(() -> {
             new PostNotFoundException("게시물을 찾을 수 없습니다.");
             return null;
         });
 
         if(post.getAccountId() == account.getAccountId() || account.getRole() == Role.ADMIN) {
-            post.modifyPost(title, content);
+            post.modifyPost(postEditDTO.getTitle(), postEditDTO.getContent());
             return post;
         }else {
             new UnauthorizedAccessException("수정 권한이 없습니다.");

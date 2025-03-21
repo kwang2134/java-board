@@ -1,5 +1,7 @@
 package service.accounts;
 
+import controller.accounts.dto.AccountDTO;
+import controller.accounts.dto.AccountEditDTO;
 import domain.accounts.Account;
 import global.exception.accounts.AccountNotFoundException;
 import global.exception.accounts.InvalidPasswordException;
@@ -12,7 +14,14 @@ public class AccountService {
         this.repository = repository;
     }
 
-    public Account signUp(Account account) {
+    public Account signUp(AccountDTO accountDTO) {
+        Account account = new Account.AccountBuilder()
+                .loginAccount(accountDTO.getLoginAccount())
+                .password(accountDTO.getPassword())
+                .name(accountDTO.getName())
+                .email(accountDTO.getEmail())
+                .build();
+
         return repository.save(account);
     }
 
@@ -45,13 +54,13 @@ public class AccountService {
         });
     }
 
-    public Account editAccount(Long accountId, String password, String email) {
+    public Account editAccount(Long accountId, AccountEditDTO accountEditDTO) {
         Account account = repository.findById(accountId).orElseGet(() -> {
             new AccountNotFoundException("계정이 존재하지 않습니다.");
             return null;
         });
 
-        account.modifyAccount(password, email);
+        account.modifyAccount(accountEditDTO.getPassword(), accountEditDTO.getEmail());
         return account;
     }
 

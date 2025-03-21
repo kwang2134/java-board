@@ -1,5 +1,7 @@
 package controller.boards;
 
+import controller.boards.dto.BoardDTO;
+import controller.boards.dto.BoardEditDTO;
 import domain.accounts.Account;
 import domain.boards.Board;
 import domain.posts.Post;
@@ -20,18 +22,22 @@ public class BoardController {
         Session session = request.getSession();
         Account authInfo = (Account) session.getAuthInfo();
 
-        Board board = new Board.BoardBuilder()
-                .boardName(request.getParam("boardName"))
-                .boardDescription(request.getParam("boardDescription"))
-                .createdBy(authInfo.getName())
-                .build();
+        BoardDTO boardDTO = new BoardDTO(
+                request.getParam("boardName"),
+                request.getParam("boardDescription"),
+                authInfo.getName()
+        );
 
-        boardService.addBoard(board);
+        Board board = boardService.addBoard(boardDTO);
+        if(board == null) {
+            System.out.println("게시판 등록에 실패하였습니다.");
+            return;
+        }
         System.out.println("게시판이 등록되었습니다. 게시판 이름: " + board.getBoardName());
     }
 
     public void editBoard(Request request, long boardId) {
-        Board board = boardService.editBoard(boardId, request.getParam("boardName"));
+        Board board = boardService.editBoard(boardId, new BoardEditDTO(request.getParam("boardName")));
         if (board != null) {
             System.out.println("게시판이 수정되었습니다.");
         }
@@ -44,6 +50,9 @@ public class BoardController {
 
     public void viewBoard(Request request, String boardName) {
         Board board = boardService.viewBoard(boardName);
+        if(board == null) {
+            return;
+        }
         List<Post> posts = board.getPosts();
         System.out.println("게시판 이름: " + board.getBoardName());
         System.out.println("게시판 생성 일자: " + board.getCreatedAt());

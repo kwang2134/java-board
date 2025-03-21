@@ -1,5 +1,7 @@
 package service.boards;
 
+import controller.boards.dto.BoardDTO;
+import controller.boards.dto.BoardEditDTO;
 import domain.boards.Board;
 import global.exception.boards.BoardNotFoundException;
 import repository.boards.BoardRepository;
@@ -11,17 +13,23 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public Board addBoard(Board board) {
+    public Board addBoard(BoardDTO boardDTO) {
+        Board board = new Board.BoardBuilder()
+                .boardName(boardDTO.getBoardName())
+                .boardDescription(boardDTO.getBoardDescription())
+                .createdBy(boardDTO.getCreatedBy())
+                .build();
+
         return boardRepository.save(board);
     }
 
-    public Board editBoard(Long boardId, String boardName) {
+    public Board editBoard(Long boardId, BoardEditDTO boardEditDTO) {
         Board board = boardRepository.findById(boardId).orElseGet(() -> {
             new BoardNotFoundException("게시판이 존재하지 않습니다.");
             return null;
         });
 
-        board.modifyBoard(boardName);
+        board.modifyBoard(boardEditDTO.getBoardName());
         return board;
     }
 

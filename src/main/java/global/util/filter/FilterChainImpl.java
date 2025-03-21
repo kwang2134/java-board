@@ -15,13 +15,17 @@ public class FilterChainImpl implements FilterChain {
 
     @Override
     public boolean doFilter(Request request) {
-        if(index < filters.size()) {
+        while (index < filters.size()) {
             Filter filter = filters.get(index++);
-            if(!filter.doFilter(request, this)) {
+            if (!filter.doFilter(request, this)) {
                 return false;
             }
-            return doFilter(request);
         }
         return true;
+    }
+
+    @Override
+    public void reset() {
+        index = 0;
     }
 }

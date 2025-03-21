@@ -13,9 +13,14 @@ public class AccountRepositoryImpl extends MemoryRepositoryImpl<Account, Long> i
 
     @Override
     public Account save(Account account) {
+        if (account == null) {
+            return null;
+        }
+
         if (account.getAccountId() == null) {
             account.setAccountId(accountIdSequence++);
         }
+
         Account savedAccount = super.save(account);
         loginAccountIndex.put(account.getLoginAccount(), account);
         return savedAccount;

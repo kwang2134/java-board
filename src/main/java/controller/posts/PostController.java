@@ -1,5 +1,7 @@
 package controller.posts;
 
+import controller.posts.dto.PostDTO;
+import controller.posts.dto.PostEditDTO;
 import domain.accounts.Account;
 import domain.posts.Post;
 import service.posts.PostService;
@@ -17,17 +19,18 @@ public class PostController {
         Session session = request.getSession();
         Account authInfo = (Account) session.getAuthInfo();
 
-        Post post = new Post.PostBuilder()
-                .title(request.getParam("title"))
-                .content(request.getParam("content"))
-                .createdBy(authInfo.getName())
-                .AccountId(authInfo.getAccountId())
-                .boardId(boardId)
-                .build();
+        PostDTO postDTO = new PostDTO(
+                request.getParam("title"),
+                request.getParam("content"),
+                authInfo.getName()
+        );
 
-        postService.addPost(post);
-
-        System.out.println("게시물이 등록되었습니다. 게시물 Id = " + post.getPostId());
+        Post post = postService.addPost(postDTO, authInfo.getAccountId(), boardId);
+        if(post == null) {
+            System.out.println("게시물 등록에 실패하였습니다.");
+             return;
+        }
+        System.out.println("게시물이 작성되었습니다. 게시물 ID: " + post.getPostId());
     }
 
     public void removePost(Request request, long postId) {
@@ -42,7 +45,7 @@ public class PostController {
         Session session = request.getSession();
         Account account = (Account) session.getAuthInfo();
 
-        Post post = postService.editPost(postId, request.getParam("title"), request.getParam("content"), account);
+        Post post = postService.editPost(postId, new PostEditDTO(request.getParam("title"), request.getParam("content")) , account);
         if (post != null) {
             System.out.println("게시물이 수정되었습니다.");
         }
@@ -50,6 +53,9 @@ public class PostController {
 
     public void viewPost(Request request, long postId) {
         Post post = postService.viewPost(postId);
+        if(post == null) {
+            return;
+        }
 
         System.out.println("[" + post.getPostId() + "]번 게시물");
         System.out.println("작성일: " + post.getCreatedAt());

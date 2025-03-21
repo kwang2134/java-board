@@ -1,5 +1,7 @@
 package controller.accounts;
 
+import controller.accounts.dto.AccountDTO;
+import controller.accounts.dto.AccountEditDTO;
 import domain.accounts.Account;
 import service.accounts.AccountService;
 import global.util.Session;
@@ -24,14 +26,17 @@ public class AccountController {
             return;
         }
 
-        Account account = new Account.AccountBuilder()
-                .loginAccount(request.getParam("loginAccount"))
-                .password(request.getParam("password"))
-                .name(request.getParam("name"))
-                .email(request.getParam("email"))
-                .build();
+        AccountDTO accountDTO = new AccountDTO(
+                request.getParam("loginAccount"),
+                request.getParam("password"),
+                request.getParam("name"),
+                request.getParam("email"));
 
-        Account signedUpAccount = accountService.signUp(account);
+        Account signedUpAccount = accountService.signUp(accountDTO);
+        if(signedUpAccount == null) {
+            System.out.println("가입에 실패하였습니다.");
+            return;
+        }
         System.out.println("가입에 성공하였습니다. 아이디: " + signedUpAccount.getLoginAccount());
     }
 
@@ -79,7 +84,7 @@ public class AccountController {
     }
 
     public void editAccount(Request request, long accountId) {
-        Account account = accountService.editAccount(accountId, request.getParam("password"), request.getParam("email"));
+        Account account = accountService.editAccount(accountId, new AccountEditDTO(request.getParam("password"), request.getParam("email")));
         if(account != null) {
             System.out.println("회원 정보가 수정되었습니다.");
         }
